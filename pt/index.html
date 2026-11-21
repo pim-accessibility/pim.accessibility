@@ -16,23 +16,25 @@
   <script>(function(){var d=document.documentElement;d.classList.add('js');function g(k){try{return localStorage.getItem(k)}catch(e){return null}}var m=window.matchMedia||function(){return{matches:false}};var t=g('pim-theme');if(t!=='light'&&t!=='dark')t=m('(prefers-color-scheme: dark)').matches?'dark':'light';d.setAttribute('data-theme',t);var a=g('pim-annotations');if(a?a==='on':m('(min-width: 80em)').matches)d.classList.add('anno-on');})();</script>
   <link rel="stylesheet" href="../css/site.css">
   <script src="../js/site.js" defer></script>
+  <script src="../js/annotations.js" defer></script>
+  <script type="application/json" id="anno-spec">{"desktop":[{"m":"bracket","sel":".skip-bar","l":"Link de salto","t":"note","it":6,"ib":6},{"m":"left","sel":".anno-pill","l":"role=\"status\"","t":"note","dx":4},{"m":"right","sel":".anno-btn","l":"Botão · o texto muda","t":"button"},{"m":"hb-top","sel":".nav-list","l":"<nav>","t":"landmark"},{"m":"top","sel":".nav-list li:nth-child(1) a","l":"Ligação","t":"link"},{"m":"top","sel":".nav-list li:nth-child(3) a","l":"Ligação","t":"link"},{"m":"top","sel":".lang-list li:nth-child(2) a","l":"lang · hreflang","t":"link"},{"m":"bracket","sel":".site-header","l":"<header>","t":"landmark","tsel":".logo","toff":-16,"ib":8,"stub":70},{"m":"hb-bottom","sel":".nav-list","l":"<ul>","t":"list"},{"m":"left","sel":".logo-badge","l":"Ligação · aria-label","t":"link","dx":4},{"m":"left","sel":"main h1","l":"h1","t":"heading","y":"line"},{"m":"right","sel":".cta","l":"Ligação","t":"link"},{"m":"dot","sel":".cta-cursor","t":"image","fx":34,"fy":36},{"m":"bracket","sel":"main","l":"<main>","t":"landmark","it":4,"ib":4,"ssel":"main h1"},{"m":"left","sel":"#about, #r-contact","l":"h2","t":"heading","y":"line"},{"m":"near-left","sel":".about-mark","l":"Decorativo","t":"image"},{"m":"right","sel":"#work, #r-focus","l":"h2","t":"heading","y":"line"},{"m":"right","sel":".work-list","l":"<ul>","t":"list"},{"m":"left","sel":"#experience, #r-exp","l":"h2","t":"heading","y":"line"},{"m":"left","sel":".timeline","l":"<ol>","t":"list","dx":4,"ysel":".year","y":"line"},{"m":"left","sel":"#r-edu","l":"h2","t":"heading","y":"line"},{"m":"left","sel":".edu-list","l":"<ul>","t":"list","dx":4,"ysel":".edu-name","y":"line"},{"m":"left","sel":"#r-skills","l":"h2","t":"heading","y":"line"},{"m":"left","sel":"#contact","l":"h2","t":"heading","y":"line"},{"m":"right","sel":".contact-links li:last-child a","l":"Ligação · ícone + texto","t":"link"},{"m":"top","sel":".theme-options","l":"Grupo de opções","t":"button","len":22},{"m":"bracket","sel":".site-footer","l":"<footer>","t":"landmark","it":8,"ib":8}],"mobile":[{"sel":".site-header","where":"prepend","chips":[["<header>","landmark"]]},{"sel":".header-navs","chips":[["<nav>","landmark"],["<ul>","list"],["Ligação ×4","link"]]},{"sel":"main h1","chips":[["h1","heading"]]},{"sel":".cta","chips":[["Ligação","link"]]},{"sel":"#about, #r-contact","chips":[["h2","heading"]]},{"sel":".about-mark","chips":[["Decorativo","image"]]},{"sel":"#work, #r-focus","chips":[["h2","heading"]]},{"sel":".work-list","chips":[["<ul>","list"]]},{"sel":"#experience, #r-exp","chips":[["h2","heading"]]},{"sel":".timeline","chips":[["<ol>","list"]]},{"sel":"#r-edu","chips":[["h2","heading"]]},{"sel":"#r-skills","chips":[["h2","heading"]]},{"sel":"#contact","chips":[["h2","heading"]]},{"sel":".contact-links","chips":[["Ligação","link"]]},{"sel":".site-footer","where":"prepend","chips":[["<footer>","landmark"]],"cls":"a11y-footer-row"},{"sel":".theme","chips":[["Grupo de opções","button"]],"cls":"a11y-radio-row"}]}</script>
 </head>
 <body>
   <div class="skip-bar on-ink" id="top">
-    <a href="#main" class="anno-skip" data-a11y="Link de salto" data-a11y-t="note">Saltar para o conteúdo principal</a>
+    <a href="#main" class="anno-skip">Saltar para o conteúdo principal</a>
   </div>
 
   <div class="anno-row wrap">
     <div class="anno-pill">
-      <p class="anno-msg" data-a11y="role=&quot;status&quot;" data-a11y-t="note" data-a11y-sm="-"><span class="icon i-info" aria-hidden="true"></span><span id="anno-status" role="status" data-on="Está a ver as anotações de acessibilidade." data-off="As anotações de acessibilidade estão ocultas.">Está a ver as anotações de acessibilidade.</span></p>
-      <button type="button" class="anno-btn" id="anno-toggle" data-hide="Ocultar" data-show="Mostrar" data-a11y="Botão · o texto muda" data-a11y-t="button" data-a11y-pos="end" data-a11y-sm="-"><span class="icon i-eye-off" aria-hidden="true"></span><span class="icon i-eye" aria-hidden="true"></span><span><span class="anno-verb">Ocultar</span><span class="anno-rest"> anotações de acessibilidade</span></span></button>
+      <p class="anno-msg"><span class="icon i-info" aria-hidden="true"></span><span id="anno-status" role="status" data-on="Está a ver as anotações de acessibilidade." data-off="As anotações de acessibilidade estão ocultas.">Está a ver as anotações de acessibilidade.</span></p>
+      <button type="button" class="anno-btn" id="anno-toggle" data-hide="Ocultar" data-show="Mostrar"><span class="icon i-eye-off" aria-hidden="true"></span><span class="icon i-eye" aria-hidden="true"></span><span><span class="anno-verb">Ocultar</span><span class="anno-rest"> anotações de acessibilidade</span></span></button>
     </div>
   </div>
 
-  <header class="site-header wrap" data-a11y="&lt;header&gt;" data-a11y-t="landmark" data-a11y-pos="bleed">
-    <a class="logo" href="./" aria-label="Portfólio da Patrícia — página inicial" data-a11y="Ligação · aria-label" data-a11y-t="link" data-a11y-sm="-"><span class="logo-badge"><img src="../assets/icons/fingerprint.svg" width="32" height="32" alt=""></span></a>
+  <header class="site-header wrap">
+    <a class="logo" href="./" aria-label="Portfólio da Patrícia — página inicial"><span class="logo-badge"><img src="../assets/icons/fingerprint.svg" width="32" height="32" alt=""></span></a>
     <div class="header-navs">
-      <nav aria-label="Principal" data-a11y="&lt;nav&gt; · &lt;ul&gt; · 4 ligações" data-a11y-t="landmark" data-a11y-pos="top">
+      <nav aria-label="Principal">
         <ul class="nav-list">
           <li><a href="#about">Sobre mim</a></li>
           <li><a href="#experience">Experiência</a></li>
@@ -41,7 +43,7 @@
         </ul>
       </nav>
       <span class="header-sep" aria-hidden="true"></span>
-      <nav aria-label="Idioma" data-a11y="lang · hreflang" data-a11y-t="link" data-a11y-pos="top" data-a11y-sm="-">
+      <nav aria-label="Idioma">
         <ul class="lang-list">
           <li><a href="../" hreflang="en" lang="en">English</a></li>
           <li><a href="./" hreflang="pt-PT" lang="pt-PT" aria-current="page">Português</a></li>
@@ -50,29 +52,29 @@
     </div>
   </header>
 
-  <main id="main" tabindex="-1" data-a11y="&lt;main&gt;" data-a11y-t="landmark" data-a11y-pos="bleed" data-a11y-sm="-">
+  <main id="main" tabindex="-1">
     <div class="hero wrap">
       <div class="hero-intro">
-        <h1 data-a11y="h1" data-a11y-t="heading">Patrícia Magrinho</h1>
+        <h1>Patrícia Magrinho</h1>
         <p class="role">Especialista em UX e Acessibilidade · Lisboa, Portugal</p>
         <p class="langs">Trabalha em português, inglês e espanhol</p>
         <p class="bio">Crio sites e aplicações que todas as pessoas conseguem usar, incluindo pessoas com deficiência. Avalio produtos segundo as normas de acessibilidade e desenho componentes que funcionam para todos.</p>
       </div>
-      <div class="cta-area" data-a11y="Ligação" data-a11y-t="link" data-a11y-pos="top">
+      <div class="cta-area">
         <a class="cta" href="resume.html">Ver o meu currículo<span class="icon i-arrow" aria-hidden="true"></span></a>
-        <span class="cta-cursor" data-a11y="Decorativo · alt=&quot;&quot;" data-a11y-t="image" data-a11y-pos="end" data-a11y-sm="-"><img src="../assets/icons/cursor.svg" width="40" height="44" alt=""></span>
+        <span class="cta-cursor"><img src="../assets/icons/cursor.svg" width="40" height="44" alt=""></span>
       </div>
     </div>
 
     <div class="cards wrap">
       <section class="card card-about on-accent" aria-labelledby="about">
-        <h2 id="about" data-a11y="h2" data-a11y-t="heading" data-a11y-pos="top">Sobre mim</h2>
+        <h2 id="about">Sobre mim</h2>
         <p>Ajudo equipas de produto a criar serviços digitais acessíveis, que cumprem a lei e funcionam mesmo para as pessoas. Isso inclui pessoas com deficiência, diferenças cognitivas ou limitações temporárias.</p>
         <span class="icon i-fingerprint about-mark" aria-hidden="true"></span>
       </section>
       <section class="card card-work on-ink" aria-labelledby="work">
-        <h2 id="work" data-a11y="h2" data-a11y-t="heading" data-a11y-pos="top">Em que trabalho</h2>
-        <ul class="work-list" data-a11y="&lt;ul&gt; · 4 itens" data-a11y-t="list" data-a11y-pos="top-end">
+        <h2 id="work">Em que trabalho</h2>
+        <ul class="work-list">
           <li><span class="work-ico"><span class="icon i-eye" aria-hidden="true"></span></span>Desenho de serviços digitais acessíveis</li>
           <li><span class="work-ico"><span class="icon i-check-sq" aria-hidden="true"></span></span>Auditorias de acessibilidade (WCAG 2.1 e 2.2)</li>
           <li><span class="work-ico"><span class="icon i-person" aria-hidden="true"></span></span>Sessões de investigação com pessoas com deficiência</li>
@@ -86,8 +88,8 @@
     </div>
 
     <section class="experience wrap" aria-labelledby="experience">
-      <h2 id="experience" data-a11y="h2" data-a11y-t="heading">Experiência</h2>
-      <ol class="timeline" data-a11y="&lt;ol&gt; · 3 itens" data-a11y-t="list">
+      <h2 id="experience">Experiência</h2>
+      <ol class="timeline">
         <li>
           <p class="year">2021 – presente</p>
           <div class="job">
@@ -116,26 +118,26 @@
     </section>
 
     <section class="contact wrap on-accent" aria-labelledby="contact">
-      <h2 id="contact" data-a11y="h2" data-a11y-t="heading">Vamos conversar</h2>
+      <h2 id="contact">Vamos conversar</h2>
       <p class="lead">O email é a forma mais rápida de me contactar.</p>
-      <ul class="contact-links" data-a11y="Ligações · ícone + texto" data-a11y-t="link">
+      <ul class="contact-links">
         <li><a href="mailto:pim.uxdesigner@gmail.com"><span class="icon i-mail" aria-hidden="true"></span>pim.uxdesigner@gmail.com</a></li>
         <li><a href="https://www.linkedin.com/in/pimagrinho/"><span class="icon i-linkedin" aria-hidden="true"></span>linkedin.com/in/pimagrinho</a></li>
       </ul>
     </section>
   </main>
 
-  <footer class="site-footer wrap" data-a11y="&lt;footer&gt;" data-a11y-t="landmark" data-a11y-pos="bleed">
+  <footer class="site-footer wrap">
     <p class="copy">© 2026 Patrícia Magrinho</p>
     <div class="footer-tools">
-      <fieldset class="theme" data-a11y="Grupo de opções · &lt;fieldset&gt;" data-a11y-t="button" data-a11y-pos="top">
+      <fieldset class="theme">
         <legend>Tema</legend>
         <div class="theme-options">
           <label class="theme-opt"><input type="radio" name="theme" value="light"><span class="icon i-check" aria-hidden="true"></span><span class="icon i-sun" aria-hidden="true"></span>Claro</label>
           <label class="theme-opt"><input type="radio" name="theme" value="dark"><span class="icon i-check" aria-hidden="true"></span><span class="icon i-moon" aria-hidden="true"></span>Escuro</label>
         </div>
       </fieldset>
-      <a class="to-top" href="#top" data-a11y="Ligação" data-a11y-t="link" data-a11y-pos="top-end" data-a11y-sm="-">Voltar ao topo<span class="icon i-up" aria-hidden="true"></span></a>
+      <a class="to-top" href="#top">Voltar ao topo<span class="icon i-up" aria-hidden="true"></span></a>
     </div>
   </footer>
 </body>

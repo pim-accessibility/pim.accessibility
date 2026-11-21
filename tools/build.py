@@ -78,11 +78,9 @@ T = {
 def e(s):  # escape text and attribute values
     return html.escape(s, quote=True)
 
-def ann(text, t, pos=None, sm=None):
-    a = f' data-a11y="{e(text)}" data-a11y-t="{t}"'
-    if pos: a += f' data-a11y-pos="{pos}"'
-    if sm is not None: a += f' data-a11y-sm="{e(sm)}"'
-    return a
+def ann(*args, **kw):
+    """Annotations are now drawn by js/annotations.js from ANNO_SPEC (see below)."""
+    return ""
 
 HEAD_JS = ("(function(){var d=document.documentElement;d.classList.add('js');"
   "function g(k){try{return localStorage.getItem(k)}catch(e){return null}}"
@@ -142,6 +140,72 @@ R = {
  ),
 }
 
+
+# ---------------------------------------------------------------------------
+# Accessibility annotations — positions reproduce the Figma layer 60:1290 (desktop)
+# and frame 57:1576 (mobile). Selectors that do not exist on a page are skipped,
+# so one spec serves the home page and the résumé.
+import json
+AL = {
+ "en": dict(skip="Skip link", btn="Button · label changes", link="Link", lang="lang · hreflang",
+            logo="Link · aria-label", dec="Decorative", contact="Link · icon + text",
+            radio="Radio group", links4="Link ×4"),
+ "pt": dict(skip="Link de salto", btn="Botão · o texto muda", link="Ligação", lang="lang · hreflang",
+            logo="Ligação · aria-label", dec="Decorativo", contact="Ligação · ícone + texto",
+            radio="Grupo de opções", links4="Ligação ×4"),
+}
+def anno_spec(k):
+    L = AL[k]
+    d = [
+      dict(m="bracket", sel=".skip-bar", l=L["skip"], t="note", it=6, ib=6),
+      dict(m="left", sel=".anno-pill", l='role="status"', t="note", dx=4),
+      dict(m="right", sel=".anno-btn", l=L["btn"], t="button"),
+      dict(m="hb-top", sel=".nav-list", l="<nav>", t="landmark"),
+      dict(m="top", sel=".nav-list li:nth-child(1) a", l=L["link"], t="link"),
+      dict(m="top", sel=".nav-list li:nth-child(3) a", l=L["link"], t="link"),
+      dict(m="top", sel=".lang-list li:nth-child(2) a", l=L["lang"], t="link"),
+      dict(m="bracket", sel=".site-header", l="<header>", t="landmark", tsel=".logo", toff=-16, ib=8, stub=70),
+      dict(m="hb-bottom", sel=".nav-list", l="<ul>", t="list"),
+      dict(m="left", sel=".logo-badge", l=L["logo"], t="link", dx=4),
+      dict(m="left", sel="main h1", l="h1", t="heading", y="line"),
+      dict(m="right", sel=".cta", l=L["link"], t="link"),
+      dict(m="dot", sel=".cta-cursor", t="image", fx=34, fy=36),
+      dict(m="bracket", sel="main", l="<main>", t="landmark", it=4, ib=4, ssel="main h1"),
+      dict(m="left", sel="#about, #r-contact", l="h2", t="heading", y="line"),
+      dict(m="near-left", sel=".about-mark", l=L["dec"], t="image"),
+      dict(m="right", sel="#work, #r-focus", l="h2", t="heading", y="line"),
+      dict(m="right", sel=".work-list", l="<ul>", t="list"),
+      dict(m="left", sel="#experience, #r-exp", l="h2", t="heading", y="line"),
+      dict(m="left", sel=".timeline", l="<ol>", t="list", dx=4, ysel=".year", y="line"),
+      dict(m="left", sel="#r-edu", l="h2", t="heading", y="line"),
+      dict(m="left", sel=".edu-list", l="<ul>", t="list", dx=4, ysel=".edu-name", y="line"),
+      dict(m="left", sel="#r-skills", l="h2", t="heading", y="line"),
+      dict(m="left", sel="#contact", l="h2", t="heading", y="line"),
+      dict(m="right", sel=".contact-links li:last-child a", l=L["contact"], t="link"),
+      dict(m="top", sel=".theme-options", l=L["radio"], t="button", len=22),
+      dict(m="bracket", sel=".site-footer", l="<footer>", t="landmark", it=8, ib=8),
+    ]
+    m = [
+      dict(sel=".site-header", where="prepend", chips=[["<header>", "landmark"]]),
+      dict(sel=".header-navs", chips=[["<nav>", "landmark"], ["<ul>", "list"], [L["links4"], "link"]]),
+      dict(sel="main h1", chips=[["h1", "heading"]]),
+      dict(sel=".cta", chips=[[L["link"], "link"]]),
+      dict(sel="#about, #r-contact", chips=[["h2", "heading"]]),
+      dict(sel=".about-mark", chips=[[L["dec"], "image"]]),
+      dict(sel="#work, #r-focus", chips=[["h2", "heading"]]),
+      dict(sel=".work-list", chips=[["<ul>", "list"]]),
+      dict(sel="#experience, #r-exp", chips=[["h2", "heading"]]),
+      dict(sel=".timeline", chips=[["<ol>", "list"]]),
+      dict(sel="#r-edu", chips=[["h2", "heading"]]),
+      dict(sel="#r-skills", chips=[["h2", "heading"]]),
+      dict(sel="#contact", chips=[["h2", "heading"]]),
+      dict(sel=".contact-links", chips=[[L["link"], "link"]]),
+      dict(sel=".site-footer", where="prepend", chips=[["<footer>", "landmark"]], cls="a11y-footer-row"),
+      dict(sel=".theme", chips=[[L["radio"], "button"]], cls="a11y-radio-row"),
+    ]
+    j = json.dumps(dict(desktop=d, mobile=m), ensure_ascii=False, separators=(",", ":"))
+    return j.replace("</", "<\\/")
+
 def icon(cls):
     return f'<span class="icon {cls}" aria-hidden="true"></span>'
 
@@ -183,6 +247,8 @@ def top(k, kind):
   <script>{HEAD_JS}</script>
   <link rel="stylesheet" href="{b}css/site.css">
   <script src="{b}js/site.js" defer></script>
+  <script src="{b}js/annotations.js" defer></script>
+  <script type="application/json" id="anno-spec">{anno_spec(k)}</script>
 </head>
 <body>
   <div class="skip-bar on-ink" id="top">

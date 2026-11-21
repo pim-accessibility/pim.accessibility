@@ -68,7 +68,7 @@
   --skip-bg: #172A40;
 }
 @media (min-width: 40em)  { :root { --gutter: 2.5rem; } }
-@media (min-width: 80em)  { :root { --gutter: max(11rem, (100vw - var(--content)) / 2); } }
+@media (min-width: 80em)  { :root { --gutter: max(12rem, (100vw - var(--content)) / 2); } }
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -164,7 +164,15 @@ html:not(.anno-on) .anno-btn .i-eye { display: inline-block; }
 html:not(.anno-on) .anno-btn .i-eye-off { display: none; }
 html.anno-on .anno-rest { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 @media (max-width: 39.99em) {
-  .anno-pill { border-radius: 1.25rem; }
+  /* Figma 57:1576: message and Hide button stay side by side */
+  .anno-pill { border-radius: 1.25rem; flex-wrap: nowrap; padding: 0.75rem 0.625rem 0.75rem 1.25rem; }
+  .anno-msg { flex: 1 1 0; min-width: 0; }
+  html.anno-on .anno-btn { flex: none; }
+}
+/* Figma 57:766: the 44px Hide button fills the pill's height (pill = 45px, button flush, 10px from the right) */
+@media (min-width: 40em) {
+  html.anno-on .anno-pill { padding: 0 0.5rem 0 1.25rem; }
+  html.anno-on .anno-btn { margin-block: -1.5px; }
 }
 
 /* ---------- Header ---------- */
@@ -189,6 +197,11 @@ html.anno-on .anno-rest { position: absolute; width: 1px; height: 1px; overflow:
 .lang-list a::after { content: ""; display: block; width: 100%; height: 3px; border-radius: 2px; background: transparent; }
 .lang-list a[aria-current="page"] { font-weight: 800; }
 .lang-list a[aria-current="page"]::after { background: currentColor; }
+@media (min-width: 48em) {
+  /* Figma 57:767: logo link 48×64, nav links padding 14 × 12 (48px high) */
+  .logo { min-height: 4rem; align-items: center; }
+  .nav-list a { padding: 0.875rem 0.75rem; }
+}
 @media (max-width: 47.99em) {
   .header-sep { display: none; }
   .nav-list a { border: 2px solid var(--border); border-radius: 999px; padding: 0.625rem 1rem; }
@@ -238,7 +251,7 @@ html.anno-on .anno-rest { position: absolute; width: 1px; height: 1px; overflow:
 
 /* ---------- Statement ---------- */
 .statement { background: var(--ink-bg); color: var(--ink-fg); padding-block: 2.25rem; }
-.statement p { font-weight: 800; font-size: clamp(1.625rem, 1.2rem + 1.5vw, 2.5rem); line-height: 1.25; max-width: var(--content); }
+.statement p { font-weight: 800; font-size: clamp(1.625rem, 1.2rem + 1.5vw, 2.5rem); line-height: 1.25; }
 
 /* ---------- Experience ---------- */
 .experience { padding-top: 5.5rem; padding-bottom: 4rem; display: grid; gap: 2rem; }
@@ -298,6 +311,10 @@ html.anno-on .anno-rest { position: absolute; width: 1px; height: 1px; overflow:
 .theme-opt:has(input:checked) .i-sun, .theme-opt:has(input:checked) .i-moon { display: none; }
 .theme-opt:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
 .theme-opt:hover:not(:has(input:checked)) { text-decoration: underline; }
+@media (max-width: 47.99em) {
+  .footer-tools { display: contents; }
+  .theme { order: -1; flex: 0 0 100%; }
+}
 .to-top { display: inline-flex; align-items: center; gap: 0.375rem; min-height: 2.75rem; font-weight: 700; font-size: 1rem; }
 .to-top .icon { --s: 1rem; }
 @media (forced-colors: active) {
@@ -305,94 +322,81 @@ html.anno-on .anno-rest { position: absolute; width: 1px; height: 1px; overflow:
 }
 
 /* =========================================================================
-   Accessibility annotations (visual, demonstrative)
-   - Chips are CSS generated content with empty alt text: content: "x" / "".
-     Screen readers get the real semantics instead of the labels.
-   - ≥ 80em (1280px): chips in the page margin with a connector line.
-   - Smaller: chips inline above the element, no lines.
+   Accessibility annotations — reproduction of the Figma layer
+   "Anotações (aria-hidden)" (desktop node 60:1290) and mobile frame 57:1576.
+   Drawn by js/annotations.js inside ONE aria-hidden layer.
    ========================================================================= */
-html:not(.anno-on) [data-a11y]::before,
-html:not(.anno-on) [data-a11y]::after { content: none; }
 
-:where(.anno-on [data-a11y]) { position: relative; }
-.anno-on [data-a11y]::before {
-  content: attr(data-a11y);
-  content: attr(data-a11y) / "";
-  display: block; width: max-content; max-width: 100%;
-  margin: 0 0 0.5rem; padding: 0.1875rem 0.625rem;
-  font: 700 0.8125rem/1.35 var(--font);
+/* Label ("Pílula"): 28px high, padding 5/13/5/10, gap 7, 16px icon, Bold 14 */
+.a11y-chip {
+  position: absolute; z-index: 3;
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 28px; padding: 5px 13px 5px 10px; box-sizing: border-box;
+  font: 700 14px/1.2 var(--font); white-space: nowrap;
   color: var(--chip-fg); background: var(--chip-bg);
-  border-radius: 999px; outline: 1.5px solid #FFFFFF; outline-offset: 0;
+  border: 1.5px solid #FFFFFF; border-radius: 999px;
   box-shadow: 0 1px 3px rgba(13, 27, 42, .25);
-  white-space: nowrap; text-align: left; text-decoration: none;
-  pointer-events: none; transform: none;
+  pointer-events: none; user-select: none;
 }
-@media (forced-colors: active) { .anno-on [data-a11y]::before { border: 1px solid CanvasText; } }
+.a11y-chip-i {
+  width: 16px; height: 16px; flex: none; background-color: currentColor;
+  -webkit-mask: var(--ci) center / contain no-repeat; mask: var(--ci) center / contain no-repeat;
+}
+/* Type colours (A11yAnnotation v1.4) — label text ≥ 7:1 on every chip */
+.a11y-chip[data-t="link"]     { --chip-bg: #1D4FA3; --chip-fg: #FFFFFF; --ci: url("../assets/annotations/link.svg"); }
+.a11y-chip[data-t="landmark"] { --chip-bg: #8C1D5E; --chip-fg: #FFFFFF; --ci: url("../assets/annotations/landmark.svg"); }
+.a11y-chip[data-t="heading"]  { --chip-bg: #0E4A4A; --chip-fg: #FFFFFF; --ci: url("../assets/annotations/heading.svg"); }
+.a11y-chip[data-t="list"]     { --chip-bg: #30379C; --chip-fg: #FFFFFF; --ci: url("../assets/annotations/list.svg"); }
+.a11y-chip[data-t="button"]   { --chip-bg: #3D5A12; --chip-fg: #FFFFFF; --ci: url("../assets/annotations/button.svg"); }
+.a11y-chip[data-t="note"]     { --chip-bg: #5B2C83; --chip-fg: #FFFFFF; --ci: url("../assets/annotations/note.svg"); }
+.a11y-chip[data-t="image"]    { --chip-bg: #CFEFD9; --chip-fg: #0B3A1C; --ci: url("../assets/annotations/image.svg"); border: 1px solid #0B3A1C; }
 
-/* Chip types — A11yAnnotation v1.4 colours, text ≥ 7:1 inside each chip */
-[data-a11y-t="link"]     { --chip-bg: #1D4FA3; --chip-fg: #FFFFFF; --chip-line: #6FA0F0; }
-[data-a11y-t="landmark"] { --chip-bg: #8C1D5E; --chip-fg: #FFFFFF; --chip-line: #E07AB4; }
-[data-a11y-t="heading"]  { --chip-bg: #0E4A4A; --chip-fg: #FFFFFF; --chip-line: #5FC8C8; }
-[data-a11y-t="image"]    { --chip-bg: #CFEFD9; --chip-fg: #0B3A1C; --chip-line: #7BD69B; }
-[data-a11y-t="list"]     { --chip-bg: #30379C; --chip-fg: #FFFFFF; --chip-line: #8F96F0; }
-[data-a11y-t="button"]   { --chip-bg: #3D5A12; --chip-fg: #FFFFFF; --chip-line: #A8D46A; }
-[data-a11y-t="note"]     { --chip-bg: #5B2C83; --chip-fg: #FFFFFF; --chip-line: #C49BEA; }
-.anno-on [data-a11y-t="image"]::before { box-shadow: 0 0 0 1px #0B3A1C; }
+/* Desktop overlay */
+.a11y-layer { position: absolute; left: 0; top: 0; width: 100%; overflow: clip; pointer-events: none; z-index: 5; }
+.a11y-layer > span:not(.a11y-chip) { position: absolute; display: block; }
+/* Connector: 2px, dash 3 / gap 4 */
+.a11y-dash-h { background: repeating-linear-gradient(90deg, var(--c) 0 3px, transparent 3px 7px); }
+.a11y-dash-v { background: repeating-linear-gradient(180deg, var(--c) 0 3px, transparent 3px 7px); }
+/* Bracket ("parêntese"): solid 2.5px */
+.a11y-solid { background: var(--c); }
+/* End point ("ponto"): 12px, white 2px stroke */
+.a11y-dot { box-sizing: border-box; background: var(--c); border: 2px solid #FFFFFF; border-radius: 50%; z-index: 2; }
 
-/* Small screens: only chips flagged for mobile stay; flex rows get the chip on its own line */
+/* Mobile / tablet: rows of labels above elements, no lines (Figma 57:1576) */
+.a11y-inline { display: none; }
 @media (max-width: 79.99em) {
-  .anno-on [data-a11y-sm]::before { content: attr(data-a11y-sm); content: attr(data-a11y-sm) / ""; }
-  .anno-on [data-a11y-sm="-"]::before { display: none; }
-  .anno-on .site-header[data-a11y]::before,
-  .anno-on .site-footer[data-a11y]::before,
-  .anno-on .header-navs[data-a11y]::before { flex: 0 0 100%; max-width: max-content; margin-right: 100%; }
-  .anno-on .site-footer[data-a11y]::before { margin-bottom: 0; }
-  .anno-on .header-navs[data-a11y]::before { margin-bottom: 0; }
-  .anno-on .anno-skip::before { display: none; }
+  /* 8px between a label row and its element (Figma 57:1576): cancel the container's own gap (--g) */
+  .anno-on .a11y-inline {
+    display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 calc(8px - var(--g, 0px));
+    flex: 0 0 100%; grid-column: 1 / -1; width: 100%;
+  }
+  .anno-on .a11y-inline .a11y-chip { position: static; }
+  .hero-intro, .site-header, .site-footer { --g: 1rem; }
+  .card, .contact { --g: 1.25rem; }
+  .card-work { --g: 1.5rem; }
+  .experience { --g: 2rem; }
+  .anno-on .a11y-inline.a11y-footer-row { margin-bottom: calc(12px - var(--g)); }
+  .anno-on .a11y-inline.a11y-footer-row { order: -3; }
+}
+@media (max-width: 47.99em) {
+  .anno-on .a11y-inline.a11y-radio-row { order: -2; margin-bottom: calc(12px - var(--g)); }
 }
 
-/* Desktop: chips move into the margin, with a connector line */
+@media (forced-colors: active) {
+  .a11y-chip { border-color: CanvasText; forced-color-adjust: none; }
+  .a11y-solid, .a11y-dot { forced-color-adjust: none; }
+}
+
+/* Desktop: room for the labels that sit above the header and footer (Figma header pt 96) */
 @media (min-width: 80em) {
-  .anno-on [data-a11y]::before {
-    position: absolute; margin: 0; z-index: 2; max-width: none;
-    top: var(--chip-top, 0);
-    right: calc(100% + var(--chip-gap, 1.75rem));
-  }
-  .anno-on [data-a11y]::after {
-    content: ""; position: absolute; z-index: 1; pointer-events: none;
-    top: calc(var(--chip-top, 0px) + 0.8rem); right: 100%;
-    width: var(--chip-gap, 1.75rem); height: 0;
-    border-top: 2px solid var(--chip-line);
-  }
-  /* Full-bleed landmarks: chip sits at the content edge + bracket spanning the landmark */
-  .anno-on [data-a11y-pos="bleed"]::before { right: calc(100% - var(--gutter) + 2.75rem); }
-  .anno-on [data-a11y-pos="bleed"]::after {
-    top: 0; bottom: 0; right: auto; left: calc(var(--gutter) - 2rem);
-    width: 0.625rem; height: auto;
-    border: 2px solid var(--chip-line); border-right: 0; border-radius: 6px 0 0 6px;
-  }
-  /* Elements away from the left edge: chip sits above them, small vertical tick */
-  .anno-on [data-a11y-pos="top"]::before { right: auto; left: 0; top: auto; bottom: calc(100% + 0.75rem); }
-  .anno-on [data-a11y-pos="top"]::after {
-    top: auto; right: auto; left: 1rem; bottom: 100%;
-    width: 0; height: 0.75rem; border-top: 0; border-left: 2px solid var(--chip-line);
-  }
-  .anno-on [data-a11y-pos="top-end"]::before { right: 0; left: auto; top: auto; bottom: calc(100% + 0.75rem); }
-  .anno-on [data-a11y-pos="top-end"]::after {
-    top: auto; right: 1rem; left: auto; bottom: 100%;
-    width: 0; height: 0.75rem; border-top: 0; border-left: 2px solid var(--chip-line);
-  }
-  .anno-on [data-a11y-pos="end"]::before { right: auto; left: calc(100% + 1rem); top: 50%; transform: translateY(-50%); }
-  .anno-on [data-a11y-pos="end"]::after { top: 50%; right: auto; left: 100%; width: 1rem; }
-  /* Room for chips that sit above elements */
   .anno-on .site-header { padding-top: 6rem; }
-  .anno-on .site-footer { padding-top: 3.5rem; }
+  .anno-on .site-footer { padding-top: 1.5rem; }
 }
 
 /* ---------- Print ---------- */
 @media print {
   .skip-bar, .anno-row, .theme, .to-top, .cta-cursor { display: none !important; }
-  [data-a11y]::before, [data-a11y]::after { content: none !important; }
+  .a11y-layer, .a11y-inline { display: none !important; }
   body { background: #FFFFFF; color: #000000; }
   .statement, .card-work, .contact { background: #FFFFFF !important; color: #000000 !important; border: 1px solid #000000; }
   a[href^="http"]::after, a[href^="mailto"]::after { content: " (" attr(href) ")"; font-weight: 400; }
