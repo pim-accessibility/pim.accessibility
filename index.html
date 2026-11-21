@@ -1,274 +1,142 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Patrícia Magrinho — UX & Accessibility Specialist based in Lisbon, Portugal.">
-  <meta name="author" content="Patrícia Magrinho">
-  <title>Patrícia Magrinho — UX & Accessibility Specialist</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/main.css">
+  <title>Patrícia Magrinho — UX &amp; Accessibility Specialist</title>
+  <meta name="description" content="Patrícia Magrinho, UX and accessibility specialist in Lisbon. Accessible digital services, WCAG audits and research with people with disabilities.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://pim-accessibility.github.io/pim.accessibility/">
+  <link rel="alternate" hreflang="en" href="https://pim-accessibility.github.io/pim.accessibility/">
+  <link rel="alternate" hreflang="pt-PT" href="https://pim-accessibility.github.io/pim.accessibility/pt/">
+  <link rel="alternate" hreflang="x-default" href="https://pim-accessibility.github.io/pim.accessibility/">
+  <link rel="icon" href="favicon.ico">
+  <link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script>(function(){var d=document.documentElement;d.classList.add('js');function g(k){try{return localStorage.getItem(k)}catch(e){return null}}var m=window.matchMedia||function(){return{matches:false}};var t=g('pim-theme');if(t!=='light'&&t!=='dark')t=m('(prefers-color-scheme: dark)').matches?'dark':'light';d.setAttribute('data-theme',t);var a=g('pim-annotations');if(a?a==='on':m('(min-width: 80em)').matches)d.classList.add('anno-on');})();</script>
+  <link rel="stylesheet" href="css/site.css">
+  <script src="js/site.js" defer></script>
 </head>
-
 <body>
+  <div class="skip-bar on-ink" id="top">
+    <a href="#main" class="anno-skip" data-a11y="Skip link" data-a11y-t="note">Skip to main content</a>
+  </div>
 
-  <!--
-    SKIP LINK
-  -->
-  <a class="skip-link" href="#about">Skip to main content</a>
+  <div class="anno-row wrap">
+    <div class="anno-pill">
+      <p class="anno-msg" data-a11y="role=&quot;status&quot;" data-a11y-t="note" data-a11y-sm="-"><span class="icon i-info" aria-hidden="true"></span><span id="anno-status" role="status" data-on="You are viewing accessibility annotations." data-off="Accessibility annotations are hidden.">You are viewing accessibility annotations.</span></p>
+      <button type="button" class="anno-btn" id="anno-toggle" data-hide="Hide" data-show="Show" data-a11y="Button · label changes" data-a11y-t="button" data-a11y-pos="end" data-a11y-sm="-"><span class="icon i-eye-off" aria-hidden="true"></span><span class="icon i-eye" aria-hidden="true"></span><span><span class="anno-verb">Hide</span><span class="anno-rest"> accessibility annotations</span></span></button>
+    </div>
+  </div>
 
-  <!--
-    HEADER — top: var(--skip-h), directly below the skip link.
-  -->
-  <header class="site-header" role="banner">
-    <div class="container header-inner">
-      <a href="#top" class="header-logo" aria-label="Patrícia Magrinho — back to top">
-        <svg aria-hidden="true" focusable="false" width="36" height="44" viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Fingerprint whorl rings, clipped to bottom half to suggest a fingertip -->
-          <!-- Ring 1 — outermost -->
-          <path d="M 2 38 C 2 20 8 8 18 6 C 28 4 34 16 34 28 C 34 36 30 42 24 44" stroke="#F5C842" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.5"/>
-          <!-- Ring 2 -->
-          <path d="M 5 38 C 5 23 10 12 18 10 C 26 8 31 19 31 30 C 31 37 28 42 23 44" stroke="#F5C842" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.65"/>
-          <!-- Ring 3 -->
-          <path d="M 8 38 C 8 25 12 16 18 14 C 24 12 28 21 28 31 C 28 37 26 42 22 44" stroke="#F5C842" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.8"/>
-          <!-- Ring 4 -->
-          <path d="M 11 38 C 11 27 14 20 18 18 C 22 16 25 23 25 32 C 25 37 23 42 21 44" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.9"/>
-          <!-- Ring 5 — innermost -->
-          <path d="M 14 36 C 14 30 16 24 18 22 C 20 20 22 25 22 32 C 22 37 21 41 20 44" stroke="#F5C842" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-          <!-- PM initials carved at the core -->
-          <text x="18" y="35" text-anchor="middle" font-family="'DM Serif Display', Georgia, serif" font-size="10" font-weight="700" fill="#F5C842" letter-spacing="0.5">PM</text>
-          <!-- Flat base line suggesting a fingertip edge -->
-          <line x1="0" y1="44" x2="36" y2="44" stroke="#F5C842" stroke-width="1" opacity="0.3"/>
-        </svg>
-      </a>
-      <nav aria-label="Main navigation">
-        <ul role="list">
+  <header class="site-header wrap" data-a11y="&lt;header&gt;" data-a11y-t="landmark" data-a11y-pos="bleed">
+    <a class="logo" href="./" aria-label="Patrícia’s portfolio — home" data-a11y="Link · aria-label" data-a11y-t="link" data-a11y-sm="-"><span class="logo-badge"><img src="assets/icons/fingerprint.svg" width="32" height="32" alt=""></span></a>
+    <div class="header-navs">
+      <nav aria-label="Main" data-a11y="&lt;nav&gt; · &lt;ul&gt; · 4 links" data-a11y-t="landmark" data-a11y-pos="top">
+        <ul class="nav-list">
           <li><a href="#about">About</a></li>
           <li><a href="#experience">Experience</a></li>
-          <li><a href="resume.html">Résumé</a></li>
+          <li><a href="resume.html" hreflang="pt-PT">Résumé</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <span class="header-sep" aria-hidden="true"></span>
+      <nav aria-label="Language" data-a11y="lang · hreflang" data-a11y-t="link" data-a11y-pos="top" data-a11y-sm="-">
+        <ul class="lang-list">
+          <li><a href="./" hreflang="en" lang="en" aria-current="page">English</a></li>
+          <li><a href="pt/" hreflang="pt-PT" lang="pt-PT">Português</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main id="main" tabindex="-1">
-
-    <section id="top" class="hero" aria-labelledby="hero-name-label">
-      <div class="container hero-inner">
-        <div class="hero-text">
-
-          <div
-            class="hero-name-group"
-            id="hero-name-label"
-            role="img"
-            aria-label="Patrícia Magrinho"
-            tabindex="0"
-            onkeydown="if(event.key==='Enter'||event.key===' '){this.classList.toggle('expanded');event.preventDefault();}"
-          >
-            <div class="hero-name-wrapper">
-              <h1 aria-hidden="true">Patrícia Magrinho</h1>
-            </div>
-          </div>
-
-          <span class="hero-role" aria-hidden="true">UX, Accessibility Specialist</span>
-
-          <p class="name-hint" aria-hidden="true">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2.5"
-                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-            hover or focus to reveal
-          </p>
-
-          <p class="hero-bio">
-            I make digital products <strong>accessible and inclusive</strong> — from accessibility audits and WCAG compliance to designing scalable systems that work for everyone.
-          </p>
-
-          <div class="hero-actions">
-            <a href="resume.html" class="btn btn-primary" target="_blank" rel="noopener">
-              View résumé
-              <span class="sr-only">(opens in a new tab)</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="hero-portrait" aria-hidden="true">
-          <div class="portrait-ring">
-            <div class="portrait-initials">PM</div>
-          </div>
-        </div>
+  <main id="main" tabindex="-1" data-a11y="&lt;main&gt;" data-a11y-t="landmark" data-a11y-pos="bleed" data-a11y-sm="-">
+    <div class="hero wrap">
+      <div class="hero-intro">
+        <h1 data-a11y="h1" data-a11y-t="heading">Patrícia Magrinho</h1>
+        <p class="role">UX &amp; Accessibility Specialist · Lisbon, Portugal</p>
+        <p class="langs">Works in English, Portuguese and Spanish</p>
+        <p class="bio">I make websites and apps that everyone can use, including people with disabilities. I check products against accessibility standards and design components that work for everyone.</p>
       </div>
+      <div class="cta-area" data-a11y="Link" data-a11y-t="link" data-a11y-pos="top">
+        <a class="cta" hreflang="pt-PT" href="resume.html">View my résumé<span class="icon i-arrow" aria-hidden="true"></span></a>
+        <span class="cta-cursor" data-a11y="Decorative · alt=&quot;&quot;" data-a11y-t="image" data-a11y-pos="end" data-a11y-sm="-"><img src="assets/icons/cursor.svg" width="40" height="44" alt=""></span>
+      </div>
+    </div>
+
+    <div class="cards wrap">
+      <section class="card card-about on-accent" aria-labelledby="about">
+        <h2 id="about" data-a11y="h2" data-a11y-t="heading" data-a11y-pos="top">About</h2>
+        <p>I help product teams build digital services that are accessible, meet the law and really work for people. That includes people with disabilities, cognitive differences or temporary limitations.</p>
+        <span class="icon i-fingerprint about-mark" aria-hidden="true"></span>
+      </section>
+      <section class="card card-work on-ink" aria-labelledby="work">
+        <h2 id="work" data-a11y="h2" data-a11y-t="heading" data-a11y-pos="top">What I work on</h2>
+        <ul class="work-list" data-a11y="&lt;ul&gt; · 4 items" data-a11y-t="list" data-a11y-pos="top-end">
+          <li><span class="work-ico"><span class="icon i-eye" aria-hidden="true"></span></span>Designing accessible digital services</li>
+          <li><span class="work-ico"><span class="icon i-check-sq" aria-hidden="true"></span></span>Accessibility audits (WCAG 2.1 and 2.2)</li>
+          <li><span class="work-ico"><span class="icon i-person" aria-hidden="true"></span></span>Research sessions with people with disabilities</li>
+          <li><span class="work-ico"><span class="icon i-grid" aria-hidden="true"></span></span>Accessible design-system components</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="statement on-ink">
+      <p class="wrap">Good accessibility is good design. It is a practice, not a checklist.</p>
+    </div>
+
+    <section class="experience wrap" aria-labelledby="experience">
+      <h2 id="experience" data-a11y="h2" data-a11y-t="heading">Experience</h2>
+      <ol class="timeline" data-a11y="&lt;ol&gt; · 3 items" data-a11y-t="list">
+        <li>
+          <p class="year">2021 – present</p>
+          <div class="job">
+            <h3>UX &amp; Accessibility Specialist</h3>
+            <p class="org">Agência para a Modernização Administrativa (AMA), via Tangível</p>
+            <ul><li>Accessibility across the whole product lifecycle</li><li>Audits and fixes (WCAG 2.1 and 2.2)</li><li>Research with people with disabilities</li></ul>
+          </div>
+        </li>
+        <li>
+          <p class="year">2019 – 2021</p>
+          <div class="job">
+            <h3>UX Designer</h3>
+            <p class="org">Instituto da Segurança Social</p>
+            <ul><li>User flows, information architecture, wireframes and prototypes</li><li>Usability tests and concept validation</li></ul>
+          </div>
+        </li>
+        <li>
+          <p class="year">2014</p>
+          <div class="job">
+            <h3>Design degree</h3>
+            <p class="org">Escola Superior de Artes e Design (ESAD), Caldas da Rainha</p>
+            <ul><li>Bachelor’s degree in Design</li></ul>
+          </div>
+        </li>
+      </ol>
     </section>
 
-    <section id="about" class="section-about" aria-labelledby="about-title">
-      <div class="container">
-        <h2 id="about-title" class="section-title">About</h2>
-        <div class="about-grid">
-          <div class="about-text">
-            <p>My career is built on a commitment to usability, accessibility, and inclusive design. I work with product teams to ensure digital services are accessible, compliant, and genuinely work for people — including those with disabilities, cognitive differences, or situational impairments.</p>
-            <p>I believe good accessibility <em>is</em> good design. Not a checklist — a practice.</p>
-          </div>
-          <div class="about-focus">
-            <h3>Current focus</h3>
-            <ul role="list" class="focus-list">
-              <li>
-                <span class="focus-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
-                </span>
-                Designing accessible digital services
-              </li>
-              <li>
-                <span class="focus-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-                </span>
-                Accessibility audits (WCAG 2.1/2.2)
-              </li>
-              <li>
-                <span class="focus-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-                </span>
-                User sessions with people with disabilities
-              </li>
-              <li>
-                <span class="focus-icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                </span>
-                Accessible design system components
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+    <section class="contact wrap on-accent" aria-labelledby="contact">
+      <h2 id="contact" data-a11y="h2" data-a11y-t="heading">Let’s talk</h2>
+      <p class="lead">Email is the quickest way to reach me.</p>
+      <ul class="contact-links" data-a11y="Links · icon + text" data-a11y-t="link">
+        <li><a href="mailto:pim.uxdesigner@gmail.com"><span class="icon i-mail" aria-hidden="true"></span>pim.uxdesigner@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/pimagrinho/" lang="en"><span class="icon i-linkedin" aria-hidden="true"></span>linkedin.com/in/pimagrinho</a></li>
+      </ul>
     </section>
-
-    <section id="experience" class="section-experience" aria-labelledby="exp-title">
-      <div class="container">
-        <h2 id="exp-title" class="section-title">Experience</h2>
-        <ol class="timeline" role="list">
-
-          <li class="timeline-item">
-            <div class="timeline-marker" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <h3>UX &amp; Accessibility Specialist</h3>
-                <span class="timeline-org">AMA / Tangível</span>
-              </div>
-              <p class="timeline-meta">
-                <time datetime="2021-05">May 2021</time> — Present · Lisbon
-              </p>
-              <ul role="list" class="timeline-list">
-                <li>Integrating accessibility throughout the full product lifecycle</li>
-                <li>Conducting audits and providing remediation recommendations (WCAG 2.1/2.2)</li>
-                <li>Facilitating user research sessions with people with disabilities</li>
-                <li>Building accessible, scalable components for design systems</li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="timeline-item">
-            <div class="timeline-marker" aria-hidden="true"></div>
-            <div class="timeline-content">
-              <div class="timeline-header">
-                <h3>UX Designer</h3>
-                <span class="timeline-org">Segurança Social</span>
-              </div>
-              <p class="timeline-meta">
-                <time datetime="2019-02">Feb 2019</time> — <time datetime="2021-03">Mar 2021</time> · Lisbon
-              </p>
-              <ul role="list" class="timeline-list">
-                <li>Designing flows, information architecture, wireframes, and prototypes</li>
-                <li>Collaborating closely with engineering teams</li>
-                <li>Conducting usability tests and concept validation</li>
-              </ul>
-            </div>
-          </li>
-
-        </ol>
-      </div>
-    </section>
-
   </main>
 
-  <footer class="site-footer" role="contentinfo">
-    <div class="container footer-inner">
-      <p>© 2026 Patrícia Magrinho. All rights reserved.</p>
-      <nav class="social" aria-label="Social links">
-        <a class="social-link"
-           href="https://www.linkedin.com/in/pimagrinho/"
-           target="_blank" rel="noopener"
-           aria-label="LinkedIn (opens in a new tab)">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-            <path fill="currentColor" d="M4.98 3.5A2.5 2.5 0 1 1 0 3.5a2.5 2.5 0 0 1 4.98 0zM.5 8.5h4.9V24H.5zM9 8.5h4.7v2.1h.1c.7-1.3 2.4-2.6 4.9-2.6 5.2 0 6.2 3.4 6.2 7.7V24h-4.9v-6.8c0-1.6 0-3.7-2.3-3.7-2.3 0-2.6 1.8-2.6 3.6V24H9z"/>
-          </svg>
-        </a>
-        <a class="social-link"
-           href="mailto:pim.uxdesigner@gmail.com"
-           aria-label="Send email to Patrícia">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-            <path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/>
-          </svg>
-        </a>
-      </nav>
+  <footer class="site-footer wrap" data-a11y="&lt;footer&gt;" data-a11y-t="landmark" data-a11y-pos="bleed">
+    <p class="copy">© 2026 Patrícia Magrinho</p>
+    <div class="footer-tools">
+      <fieldset class="theme" data-a11y="Radio group · &lt;fieldset&gt;" data-a11y-t="button" data-a11y-pos="top">
+        <legend>Theme</legend>
+        <div class="theme-options">
+          <label class="theme-opt"><input type="radio" name="theme" value="light"><span class="icon i-check" aria-hidden="true"></span><span class="icon i-sun" aria-hidden="true"></span>Light</label>
+          <label class="theme-opt"><input type="radio" name="theme" value="dark"><span class="icon i-check" aria-hidden="true"></span><span class="icon i-moon" aria-hidden="true"></span>Dark</label>
+        </div>
+      </fieldset>
+      <a class="to-top" href="#top" data-a11y="Link" data-a11y-t="link" data-a11y-pos="top-end" data-a11y-sm="-">Back to top<span class="icon i-up" aria-hidden="true"></span></a>
     </div>
   </footer>
-
-  <script>
-    (function () {
-      var RATIO = 0.63;
-
-      function init() {
-        var group = document.querySelector('.hero-name-group');
-        var h1    = document.querySelector('.hero-name-group h1');
-        if (!group || !h1) return;
-
-        var fullH = h1.getBoundingClientRect().height;
-        if (fullH < 1) return; // fonts not rendered yet
-
-        var clipH = Math.round(fullH * RATIO);
-
-        group.style.setProperty('--name-full-h', Math.ceil(fullH) + 'px');
-
-        // Only apply clip height if not already expanded
-        if (!group.classList.contains('expanded') &&
-            !group.matches(':hover') &&
-            !group.matches(':focus-within')) {
-          group.style.height = clipH + 'px';
-        }
-
-        // Update on hover/focus listeners to use exact values
-        function expand() {
-          group.style.height = Math.ceil(fullH) + 'px';
-          group.style.borderBottomColor = 'transparent';
-        }
-        function collapse() {
-          if (!group.classList.contains('expanded')) {
-            group.style.height = clipH + 'px';
-            group.style.borderBottomColor = '';
-          }
-        }
-
-        group.addEventListener('mouseenter', expand);
-        group.addEventListener('mouseleave', collapse);
-        group.addEventListener('focusin',    expand);
-        group.addEventListener('focusout',   collapse);
-      }
-
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(init);
-      } else {
-        setTimeout(init, 250);
-      }
-
-      var timer;
-      window.addEventListener('resize', function () {
-        clearTimeout(timer);
-        timer = setTimeout(init, 80);
-      });
-    })();
-  </script>
-
 </body>
 </html>
