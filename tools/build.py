@@ -50,7 +50,7 @@ T = {
   hide="Ocultar", show="Mostrar", anno_rest=" anotações de acessibilidade",
   logo="Portfólio da Patrícia — página inicial",
   nav_label="Principal", lang_label="Idioma",
-  nav=[("#about","Sobre mim"),("#experience","Experiência"),("../resume.html","Currículo"),("#contact","Contacto")],
+  nav=[("#about","Sobre mim"),("#experience","Experiência"),("resume.html","Currículo"),("#contact","Contacto")],
   role="Especialista em UX e Acessibilidade · Lisboa, Portugal",
   langs="Trabalha em português, inglês e espanhol",
   bio="Crio sites e aplicações que todas as pessoas conseguem usar, incluindo pessoas com deficiência. Avalio produtos segundo as normas de acessibilidade e desenho componentes que funcionam para todos.",
@@ -91,41 +91,92 @@ HEAD_JS = ("(function(){var d=document.documentElement;d.classList.add('js');"
   "d.setAttribute('data-theme',t);"
   "var a=g('pim-annotations');if(a?a==='on':m('(min-width: 80em)').matches)d.classList.add('anno-on');})();")
 
-def page(k):
-    c = T[k]; b = c["base"]; en = k == "en"
-    icon = lambda cls, extra="": f'<span class="icon {cls}"{extra} aria-hidden="true"></span>'
-    nav = "\n".join(f'          <li><a href="{e(h)}"' + (' hreflang="pt-PT"' if en and h.endswith("resume.html") else "") + f'>{e(t)}</a></li>' for h, t in c["nav"])
-    if en:
-        langs = ('          <li><a href="./" hreflang="en" lang="en" aria-current="page">English</a></li>\n'
-                 '          <li><a href="pt/" hreflang="pt-PT" lang="pt-PT">Português</a></li>')
-    else:
-        langs = ('          <li><a href="../" hreflang="en" lang="en">English</a></li>\n'
-                 '          <li><a href="./" hreflang="pt-PT" lang="pt-PT" aria-current="page">Português</a></li>')
-    work = "\n".join(f'          <li><span class="work-ico">{icon(i)}</span>{e(t)}</li>' for i, t in c["work"])
-    jobs = []
-    for y, r, o, bl in c["jobs"]:
-        items = "".join(f"<li>{e(x)}</li>" for x in bl)
-        jobs.append(f'''        <li>
-          <p class="year">{e(y)}</p>
-          <div class="job">
-            <h3>{e(r)}</h3>
-            <p class="org">{e(o)}</p>
-            <ul>{items}</ul>
-          </div>
-        </li>''')
-    jobs = "\n".join(jobs)
+
+# ---------------------------------------------------------------------------
+# Résumé content (from the previous résumé page, rewritten for v2.2).
+# The phone number is intentionally not published: the v2.2 design offers email + LinkedIn only.
+R = {
+ "en": dict(
+  title="Résumé — Patrícia Magrinho",
+  desc="Résumé of Patrícia Magrinho, UX and accessibility specialist in Lisbon.",
+  h1="Résumé",
+  intro="Hi, I’m Patrícia, a UX and accessibility specialist at Tangível. I work with teams to make sure digital products and services are accessible, inclusive and compliant.",
+  contact_h="Contact", loc_l="Location", loc="Lisbon, Portugal", email_l="Email", li_l="LinkedIn",
+  focus_h="Current focus", focus=["Designing accessible digital services", "Accessibility audits (WCAG 2.1 and 2.2)"],
+  exp_h="Experience",
+  jobs=[
+   ("May 2021 – present", "UX & Accessibility Specialist", "Agência para a Modernização Administrativa (AMA), via Tangível · Lisbon",
+    ["Bring accessibility into every stage of the product lifecycle", "Accessibility audits and remediation advice (WCAG 2.1 and 2.2)", "Research sessions with people with disabilities", "Accessible, scalable components for design systems"]),
+   ("Feb 2019 – Mar 2021", "UX Designer", "Instituto da Segurança Social · Lisbon",
+    ["User flows, information architecture, wireframes and prototypes", "Close work with development teams", "Usability tests and concept validation"]),
+  ],
+  edu_h="Education and credentials",
+  edu=[("Auditing Design Systems for Accessibility", "LinkedIn Learning · Feb 2023"), ("UXPM (Level 1)", "UXC · Jul 2023"), ("Design degree", "Escola Superior de Artes e Design (ESAD), Caldas da Rainha · 2014")],
+  skills_h="Skills",
+  skills=[("Research", ["Surveys and competitive analysis", "Information architecture", "Quantitative and qualitative research and testing"]),
+          ("Design", ["UI design, wireframing and prototyping", "Accessible components"]),
+          ("Tools", ["Figma, Adobe Creative Cloud, Jira", "Hotjar, Treejack, VS Code"])],
+  back="Back to the home page",
+ ),
+ "pt": dict(
+  title="Currículo — Patrícia Magrinho",
+  desc="Currículo de Patrícia Magrinho, especialista em UX e acessibilidade em Lisboa.",
+  h1="Currículo",
+  intro="Olá, sou a Patrícia, especialista em UX e Acessibilidade na Tangível. Trabalho com equipas para garantir que produtos e serviços digitais são acessíveis, inclusivos e conformes.",
+  contact_h="Contacto", loc_l="Localização", loc="Lisboa, Portugal", email_l="Email", li_l="LinkedIn",
+  focus_h="Foco atual", focus=["Desenho de serviços digitais acessíveis", "Auditorias de acessibilidade (WCAG 2.1 e 2.2)"],
+  exp_h="Experiência",
+  jobs=[
+   ("Maio 2021 – presente", "Especialista em UX e Acessibilidade", "Agência para a Modernização Administrativa (AMA), via Tangível · Lisboa",
+    ["Integrar a acessibilidade ao longo do ciclo de vida do produto", "Auditorias e recomendações de correção (WCAG 2.1 e 2.2)", "Sessões com pessoas com deficiência", "Componentes acessíveis e escaláveis para design systems"]),
+   ("Fev. 2019 – Mar. 2021", "UX Designer", "Instituto da Segurança Social · Lisboa",
+    ["Fluxos, arquitetura de informação, wireframes e protótipos", "Trabalho próximo com as equipas de desenvolvimento", "Testes de usabilidade e validação de conceitos"]),
+  ],
+  edu_h="Formação e certificações",
+  edu=[("Auditing Design Systems for Accessibility", "LinkedIn Learning · Fev. 2023"), ("UXPM (Nível 1)", "UXC · Jul. 2023"), ("Licenciatura em Design", "Escola Superior de Artes e Design (ESAD), Caldas da Rainha · 2014")],
+  skills_h="Competências",
+  skills=[("Investigação", ["Inquéritos e análise competitiva", "Arquitetura de informação", "Investigação e testes quantitativos e qualitativos"]),
+          ("Design", ["UI design, wireframes e prototipagem", "Componentes acessíveis"]),
+          ("Ferramentas", ["Figma, Adobe Creative Cloud, Jira", "Hotjar, Treejack, VS Code"])],
+  back="Voltar à página inicial",
+ ),
+}
+
+def icon(cls):
+    return f'<span class="icon {cls}" aria-hidden="true"></span>'
+
+def top(k, kind):
+    """<head>, skip link, annotations control and header — identical on every page (3.2.3 / 3.2.4)."""
+    c = T[k]; b = c["base"]; en = k == "en"; home = kind == "home"
+    r = R[k]
+    title, desc = (c["title"], c["desc"]) if home else (r["title"], r["desc"])
+    path = "" if home else "resume.html"
+    self_url = c["self_url"] + path
+    pre = "" if home else "./"   # in-page anchors live on the home page
+    def href(h):
+        if h.startswith("#"): return (pre + h) if not home else h
+        return h
+    def cur(h):
+        return ' aria-current="page"' if (not home and h == "resume.html") else ""
+    nav = "\n".join(f'          <li><a href="{e(href(h))}"{cur(h)}>{e(t)}</a></li>' for h, t in c["nav"])
+    en_href = ("./" if en else "../") + path
+    pt_href = ("pt/" if en else "./") + path
+    ac = ' aria-current="page"'
+    ca_en, ca_pt = (ac, "") if en else ("", ac)
+    langs = (f'          <li><a href="{en_href}" hreflang="en" lang="en"{ca_en}>English</a></li>\n'
+             f'          <li><a href="{pt_href}" hreflang="pt-PT" lang="pt-PT"{ca_pt}>Português</a></li>')
     return f'''<!DOCTYPE html>
 <html lang="{c["lang"]}" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{e(c["title"])}</title>
-  <meta name="description" content="{e(c["desc"])}">
+  <title>{e(title)}</title>
+  <meta name="description" content="{e(desc)}">
   <meta name="color-scheme" content="light dark">
-  <link rel="canonical" href="{c["self_url"]}">
-  <link rel="alternate" hreflang="en" href="{SITE}">
-  <link rel="alternate" hreflang="pt-PT" href="{SITE}pt/">
-  <link rel="alternate" hreflang="x-default" href="{SITE}">
+  <link rel="canonical" href="{self_url}">
+  <link rel="alternate" hreflang="en" href="{SITE}{path}">
+  <link rel="alternate" hreflang="pt-PT" href="{SITE}pt/{path}">
+  <link rel="alternate" hreflang="x-default" href="{SITE}{path}">
   <link rel="icon" href="{b}favicon.ico">
   <link rel="preload" href="{b}assets/fonts/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{b}assets/fonts/atkinson-hyperlegible-next-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -161,7 +212,46 @@ def page(k):
       </nav>
     </div>
   </header>
+'''
 
+def bottom(k):
+    c = T[k]
+    return f'''
+  <footer class="site-footer wrap"{ann("<footer>", "landmark", "bleed")}>
+    <p class="copy">© 2026 Patrícia Magrinho</p>
+    <div class="footer-tools">
+      <fieldset class="theme"{ann(c["a_radio"], "button", "top")}>
+        <legend>{e(c["theme"])}</legend>
+        <div class="theme-options">
+          <label class="theme-opt"><input type="radio" name="theme" value="light">{icon("i-check")}{icon("i-sun")}{e(c["light"])}</label>
+          <label class="theme-opt"><input type="radio" name="theme" value="dark">{icon("i-check")}{icon("i-moon")}{e(c["dark"])}</label>
+        </div>
+      </fieldset>
+      <a class="to-top" href="#top"{ann(c["a_link"], "link", "top-end", "-")}>{e(c["top"])}{icon("i-up")}</a>
+    </div>
+  </footer>
+</body>
+</html>
+'''
+
+def contact_links(c):
+    return f'''<ul class="contact-links"{ann(c["a_contact"], "link")}>
+        <li><a href="mailto:pim.uxdesigner@gmail.com">{icon("i-mail")}pim.uxdesigner@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/pimagrinho/">{icon("i-linkedin")}linkedin.com/in/pimagrinho</a></li>
+      </ul>'''
+
+def home(k):
+    c = T[k]; b = c["base"]
+    work = "\n".join(f'          <li><span class="work-ico">{icon(i)}</span>{e(t)}</li>' for i, t in c["work"])
+    jobs = "\n".join(f'''        <li>
+          <p class="year">{e(y)}</p>
+          <div class="job">
+            <h3>{e(r)}</h3>
+            <p class="org">{e(o)}</p>
+            <ul>{"".join(f"<li>{e(x)}</li>" for x in bl)}</ul>
+          </div>
+        </li>''' for y, r, o, bl in c["jobs"])
+    return top(k, "home") + f'''
   <main id="main" tabindex="-1"{ann("<main>", "landmark", "bleed", "-")}>
     <div class="hero wrap">
       <div class="hero-intro">
@@ -171,7 +261,7 @@ def page(k):
         <p class="bio">{e(c["bio"])}</p>
       </div>
       <div class="cta-area"{ann(c["a_link"], "link", "top")}>
-        <a class="cta"{' hreflang="pt-PT"' if en else ''} href="{b}resume.html">{e(c["cta"])}{icon("i-arrow")}</a>
+        <a class="cta" href="resume.html">{e(c["cta"])}{icon("i-arrow")}</a>
         <span class="cta-cursor"{ann(c["a_dec"], "image", "end", "-")}><img src="{b}assets/icons/cursor.svg" width="40" height="44" alt=""></span>
       </div>
     </div>
@@ -204,31 +294,117 @@ def page(k):
     <section class="contact wrap on-accent" aria-labelledby="contact">
       <h2 id="contact"{ann("h2", "heading")}>{e(c["talk_h"])}</h2>
       <p class="lead">{e(c["talk_lead"])}</p>
-      <ul class="contact-links"{ann(c["a_contact"], "link")}>
-        <li><a href="mailto:pim.uxdesigner@gmail.com">{icon("i-mail")}pim.uxdesigner@gmail.com</a></li>
-        <li><a href="https://www.linkedin.com/in/pimagrinho/" lang="en">{icon("i-linkedin")}linkedin.com/in/pimagrinho</a></li>
-      </ul>
+      {contact_links(c)}
     </section>
   </main>
+''' + bottom(k)
 
-  <footer class="site-footer wrap"{ann("<footer>", "landmark", "bleed")}>
-    <p class="copy">© 2026 Patrícia Magrinho</p>
-    <div class="footer-tools">
-      <fieldset class="theme"{ann(c["a_radio"], "button", "top")}>
-        <legend>{e(c["theme"])}</legend>
-        <div class="theme-options">
-          <label class="theme-opt"><input type="radio" name="theme" value="light">{icon("i-check")}{icon("i-sun")}{e(c["light"])}</label>
-          <label class="theme-opt"><input type="radio" name="theme" value="dark">{icon("i-check")}{icon("i-moon")}{e(c["dark"])}</label>
-        </div>
-      </fieldset>
-      <a class="to-top" href="#top"{ann(c["a_link"], "link", "top-end", "-")}>{e(c["top"])}{icon("i-up")}</a>
+def resume(k):
+    c = T[k]; r = R[k]
+    jobs = "\n".join(f'''        <li>
+          <p class="year">{e(y)}</p>
+          <div class="job">
+            <h3>{e(t)}</h3>
+            <p class="org">{e(o)}</p>
+            <ul>{"".join(f"<li>{e(x)}</li>" for x in bl)}</ul>
+          </div>
+        </li>''' for y, t, o, bl in r["jobs"])
+    edu = "\n".join(f'          <li><p class="edu-name">{e(n)}</p><p class="org">{e(m)}</p></li>' for n, m in r["edu"])
+    skills = "\n".join(f'''        <section class="skill" aria-labelledby="sk-{i}">
+          <h3 id="sk-{i}">{e(h)}</h3>
+          <ul>{"".join(f"<li>{e(x)}</li>" for x in items)}</ul>
+        </section>''' for i, (h, items) in enumerate(r["skills"], 1))
+    focus = "".join(f"<li>{e(x)}</li>" for x in r["focus"])
+    return top(k, "resume") + f'''
+  <main id="main" tabindex="-1"{ann("<main>", "landmark", "bleed", "-")}>
+    <div class="hero resume-hero wrap">
+      <div class="hero-intro">
+        <h1{ann("h1", "heading")}>{e(r["h1"])}</h1>
+        <p class="role">Patrícia Magrinho · {e(c["role"])}</p>
+        <p class="bio">{e(r["intro"])}</p>
+      </div>
     </div>
-  </footer>
+
+    <div class="cards wrap">
+      <section class="card card-about on-accent" aria-labelledby="r-contact">
+        <h2 id="r-contact"{ann("h2", "heading", "top")}>{e(r["contact_h"])}</h2>
+        <dl class="facts">
+          <div><dt>{e(r["loc_l"])}</dt><dd>{e(r["loc"])}</dd></div>
+          <div><dt>{e(r["email_l"])}</dt><dd><a href="mailto:pim.uxdesigner@gmail.com">pim.uxdesigner@gmail.com</a></dd></div>
+          <div><dt>{e(r["li_l"])}</dt><dd><a href="https://www.linkedin.com/in/pimagrinho/">linkedin.com/in/pimagrinho</a></dd></div>
+        </dl>
+      </section>
+      <section class="card card-work on-ink" aria-labelledby="r-focus">
+        <h2 id="r-focus"{ann("h2", "heading", "top")}>{e(r["focus_h"])}</h2>
+        <ul class="work-list">
+          <li><span class="work-ico">{icon("i-eye")}</span>{e(r["focus"][0])}</li>
+          <li><span class="work-ico">{icon("i-check-sq")}</span>{e(r["focus"][1])}</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="experience wrap" aria-labelledby="r-exp">
+      <h2 id="r-exp"{ann("h2", "heading")}>{e(r["exp_h"])}</h2>
+      <ol class="timeline"{ann("<ol>", "list")}>
+{jobs}
+      </ol>
+    </section>
+
+    <section class="experience resume-block wrap" aria-labelledby="r-edu">
+      <h2 id="r-edu"{ann("h2", "heading")}>{e(r["edu_h"])}</h2>
+      <ul class="edu-list">
+{edu}
+      </ul>
+    </section>
+
+    <section class="experience resume-block wrap" aria-labelledby="r-skills">
+      <h2 id="r-skills"{ann("h2", "heading")}>{e(r["skills_h"])}</h2>
+      <div class="skills">
+{skills}
+      </div>
+    </section>
+  </main>
+''' + bottom(k)
+
+def notfound():
+    """404 for GitHub Pages: served at any path, so every URL is absolute. Bilingual, no JS needed."""
+    P = "/pim.accessibility/"
+    return f'''<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found — Patrícia Magrinho</title>
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="{P}favicon.ico">
+  <script>{HEAD_JS.replace("if(a?a==='on':m('(min-width: 80em)').matches)d.classList.add('anno-on');", "")}</script>
+  <link rel="stylesheet" href="{P}css/site.css">
+</head>
+<body>
+  <div class="skip-bar on-ink" id="top"><a href="#main">Skip to main content</a></div>
+  <header class="site-header wrap">
+    <a class="logo" href="{P}" aria-label="Patrícia’s portfolio — home"><span class="logo-badge"><img src="{P}assets/icons/fingerprint.svg" width="32" height="32" alt=""></span></a>
+  </header>
+  <main id="main" tabindex="-1" class="hero wrap notfound">
+    <div class="hero-intro">
+      <h1>Page not found</h1>
+      <p class="bio">This address does not exist or has moved.</p>
+      <p><a class="cta" href="{P}">Go to the home page{icon("i-arrow")}</a></p>
+    </div>
+    <div class="hero-intro" lang="pt-PT">
+      <h2>Página não encontrada</h2>
+      <p class="bio">Este endereço não existe ou mudou de sítio.</p>
+      <p><a class="cta" href="{P}pt/">Ir para a página inicial{icon("i-arrow")}</a></p>
+    </div>
+  </main>
 </body>
 </html>
 '''
 
-(REPO / "index.html").write_text(page("en"), encoding="utf-8")
 (REPO / "pt").mkdir(exist_ok=True)
-(REPO / "pt" / "index.html").write_text(page("pt"), encoding="utf-8")
+for k, d in (("en", REPO), ("pt", REPO / "pt")):
+    (d / "index.html").write_text(home(k), encoding="utf-8")
+    (d / "resume.html").write_text(resume(k), encoding="utf-8")
+(REPO / "404.html").write_text(notfound(), encoding="utf-8")
 print("ok")

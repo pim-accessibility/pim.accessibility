@@ -1,124 +1,144 @@
-<!doctype html>
-<html lang="pt-PT">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Currículo de Patrícia Magrinho — UX e Acessibilidade">
-  <meta name="author" content="Patrícia Magrinho">
-  <title>Currículo — Patrícia Magrinho</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
+  <title>Résumé — Patrícia Magrinho</title>
+  <meta name="description" content="Résumé of Patrícia Magrinho, UX and accessibility specialist in Lisbon.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://pim-accessibility.github.io/pim.accessibility/resume.html">
+  <link rel="alternate" hreflang="en" href="https://pim-accessibility.github.io/pim.accessibility/resume.html">
+  <link rel="alternate" hreflang="pt-PT" href="https://pim-accessibility.github.io/pim.accessibility/pt/resume.html">
+  <link rel="alternate" hreflang="x-default" href="https://pim-accessibility.github.io/pim.accessibility/resume.html">
+  <link rel="icon" href="favicon.ico">
+  <link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script>(function(){var d=document.documentElement;d.classList.add('js');function g(k){try{return localStorage.getItem(k)}catch(e){return null}}var m=window.matchMedia||function(){return{matches:false}};var t=g('pim-theme');if(t!=='light'&&t!=='dark')t=m('(prefers-color-scheme: dark)').matches?'dark':'light';d.setAttribute('data-theme',t);var a=g('pim-annotations');if(a?a==='on':m('(min-width: 80em)').matches)d.classList.add('anno-on');})();</script>
+  <link rel="stylesheet" href="css/site.css">
+  <script src="js/site.js" defer></script>
 </head>
+<body>
+  <div class="skip-bar on-ink" id="top">
+    <a href="#main" class="anno-skip" data-a11y="Skip link" data-a11y-t="note">Skip to main content</a>
+  </div>
 
-<body id="top">
+  <div class="anno-row wrap">
+    <div class="anno-pill">
+      <p class="anno-msg" data-a11y="role=&quot;status&quot;" data-a11y-t="note" data-a11y-sm="-"><span class="icon i-info" aria-hidden="true"></span><span id="anno-status" role="status" data-on="You are viewing accessibility annotations." data-off="Accessibility annotations are hidden.">You are viewing accessibility annotations.</span></p>
+      <button type="button" class="anno-btn" id="anno-toggle" data-hide="Hide" data-show="Show" data-a11y="Button · label changes" data-a11y-t="button" data-a11y-pos="end" data-a11y-sm="-"><span class="icon i-eye-off" aria-hidden="true"></span><span class="icon i-eye" aria-hidden="true"></span><span><span class="anno-verb">Hide</span><span class="anno-rest"> accessibility annotations</span></span></button>
+    </div>
+  </div>
 
-  <header class="masthead">
-    <div class="container">
-      <h1 class="name">Patrícia Magrinho</h1>
-      <p class="role">UX, Accessibility Specialist</p>
-
-      <!-- Contactos em <address> + <dl> (boa semântica para web e PDF) -->
-      <address class="contact" aria-label="Contactos">
-        <dl>
-          <div class="pair">
-            <dt>Localização</dt>
-            <dd>Lisboa, Portugal</dd>
-          </div>
-          <div class="pair">
-            <dt>Email</dt>
-            <dd><a href="mailto:pim.uxdesigner@gmail.com">pim.uxdesigner@gmail.com</a></dd>
-          </div>
-          <div class="pair">
-            <dt>Telemóvel</dt>
-            <dd><a href="tel:+351912463834">+351 912 463 834</a></dd>
-          </div>
-          <div class="pair">
-            <dt>LinkedIn</dt>
-            <dd><a href="https://www.linkedin.com/in/pimagrinho/">linkedin.com/in/pimagrinho</a></dd>
-          </div>
-        </dl>
-      </address>
+  <header class="site-header wrap" data-a11y="&lt;header&gt;" data-a11y-t="landmark" data-a11y-pos="bleed">
+    <a class="logo" href="./" aria-label="Patrícia’s portfolio — home" data-a11y="Link · aria-label" data-a11y-t="link" data-a11y-sm="-"><span class="logo-badge"><img src="assets/icons/fingerprint.svg" width="32" height="32" alt=""></span></a>
+    <div class="header-navs">
+      <nav aria-label="Main" data-a11y="&lt;nav&gt; · &lt;ul&gt; · 4 links" data-a11y-t="landmark" data-a11y-pos="top">
+        <ul class="nav-list">
+          <li><a href="./#about">About</a></li>
+          <li><a href="./#experience">Experience</a></li>
+          <li><a href="resume.html" aria-current="page">Résumé</a></li>
+          <li><a href="./#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <span class="header-sep" aria-hidden="true"></span>
+      <nav aria-label="Language" data-a11y="lang · hreflang" data-a11y-t="link" data-a11y-pos="top" data-a11y-sm="-">
+        <ul class="lang-list">
+          <li><a href="./resume.html" hreflang="en" lang="en" aria-current="page">English</a></li>
+          <li><a href="pt/resume.html" hreflang="pt-PT" lang="pt-PT">Português</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
-  <main id="main" tabindex="-1">
-    <div class="container">
+  <main id="main" tabindex="-1" data-a11y="&lt;main&gt;" data-a11y-t="landmark" data-a11y-pos="bleed" data-a11y-sm="-">
+    <div class="hero resume-hero wrap">
+      <div class="hero-intro">
+        <h1 data-a11y="h1" data-a11y-t="heading">Résumé</h1>
+        <p class="role">Patrícia Magrinho · UX &amp; Accessibility Specialist · Lisbon, Portugal</p>
+        <p class="bio">Hi, I’m Patrícia, a UX and accessibility specialist at Tangível. I work with teams to make sure digital products and services are accessible, inclusive and compliant.</p>
+      </div>
+    </div>
 
-      <section aria-labelledby="bio-title">
-        <h2 id="bio-title">Bio</h2>
-        <p>
-          Olá, eu sou a <strong>Patrícia</strong>, especialista em <strong>UX e Acessibilidade</strong> na Tangível.
-          Trabalho com equipas para garantir que produtos e serviços digitais são acessíveis, inclusivos e conformes.
-        </p>
-
-        <h3 id="focus-title">Foco atual</h3>
-        <ul aria-labelledby="focus-title">
-          <li>Desenhar serviços digitais acessíveis</li>
-          <li>Fazer auditorias de acessibilidade (WCAG 2.1/2.2)</li>
-        </ul>
+    <div class="cards wrap">
+      <section class="card card-about on-accent" aria-labelledby="r-contact">
+        <h2 id="r-contact" data-a11y="h2" data-a11y-t="heading" data-a11y-pos="top">Contact</h2>
+        <dl class="facts">
+          <div><dt>Location</dt><dd>Lisbon, Portugal</dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:pim.uxdesigner@gmail.com">pim.uxdesigner@gmail.com</a></dd></div>
+          <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/pimagrinho/">linkedin.com/in/pimagrinho</a></dd></div>
+        </dl>
       </section>
-
-      <section aria-labelledby="exp-title">
-        <h2 id="exp-title">Experiência</h2>
-
-        <article aria-labelledby="job-1-title">
-          <h3 id="job-1-title">UX &amp; Accessibility — AMA / Tangível</h3>
-          <p class="meta">Mai 2021 — Presente · Lisboa</p>
-          <ul>
-            <li>Integrar acessibilidade ao longo do ciclo de vida do produto</li>
-            <li>Auditorias e recomendações de remediação (WCAG 2.1/2.2)</li>
-            <li>Sessões com pessoas com deficiência</li>
-            <li>Componentes acessíveis e escaláveis para Design Systems</li>
-          </ul>
-        </article>
-
-        <article aria-labelledby="job-2-title">
-          <h3 id="job-2-title">UX Designer — Segurança Social</h3>
-          <p class="meta">Fev 2019 — Mar 2021 · Lisboa</p>
-          <ul>
-            <li>Fluxos, arquitetura de informação, wireframes e protótipos</li>
-            <li>Trabalho próximo com desenvolvimento</li>
-            <li>Testes de usabilidade e validação de conceitos</li>
-          </ul>
-        </article>
-      </section>
-
-      <section aria-labelledby="edu-title">
-        <h2 id="edu-title">Educação e acreditações</h2>
-        <ul>
-          <li><strong>Auditing Design Systems for Accessibility</strong> — LinkedIn Learning (Fev 2023)</li>
-          <li><strong>UXPM (Nível 1)</strong> — UXC (Jul 2023)</li>
-          <li><strong>ESAD.CR</strong> — Design (Fev 2014)</li>
-        </ul>
-      </section>
-
-      <section aria-labelledby="skills-title">
-        <h2 id="skills-title">Skills</h2>
-
-        <h3>Research</h3>
-        <ul>
-          <li>Surveys, Competitive Analysis</li>
-          <li>Information Architecture</li>
-          <li>Research e testes (quantitativo e qualitativo)</li>
-        </ul>
-
-        <h3>Design</h3>
-        <ul>
-          <li>UI Design, Wireframing, Prototipagem</li>
-          <li>Componentes acessíveis</li>
-        </ul>
-
-        <h3>Ferramentas</h3>
-        <ul>
-          <li>Figma, Adobe CC, Jira</li>
-          <li>Hotjar, Treejack, VS Code</li>
+      <section class="card card-work on-ink" aria-labelledby="r-focus">
+        <h2 id="r-focus" data-a11y="h2" data-a11y-t="heading" data-a11y-pos="top">Current focus</h2>
+        <ul class="work-list">
+          <li><span class="work-ico"><span class="icon i-eye" aria-hidden="true"></span></span>Designing accessible digital services</li>
+          <li><span class="work-ico"><span class="icon i-check-sq" aria-hidden="true"></span></span>Accessibility audits (WCAG 2.1 and 2.2)</li>
         </ul>
       </section>
     </div>
+
+    <section class="experience wrap" aria-labelledby="r-exp">
+      <h2 id="r-exp" data-a11y="h2" data-a11y-t="heading">Experience</h2>
+      <ol class="timeline" data-a11y="&lt;ol&gt;" data-a11y-t="list">
+        <li>
+          <p class="year">May 2021 – present</p>
+          <div class="job">
+            <h3>UX &amp; Accessibility Specialist</h3>
+            <p class="org">Agência para a Modernização Administrativa (AMA), via Tangível · Lisbon</p>
+            <ul><li>Bring accessibility into every stage of the product lifecycle</li><li>Accessibility audits and remediation advice (WCAG 2.1 and 2.2)</li><li>Research sessions with people with disabilities</li><li>Accessible, scalable components for design systems</li></ul>
+          </div>
+        </li>
+        <li>
+          <p class="year">Feb 2019 – Mar 2021</p>
+          <div class="job">
+            <h3>UX Designer</h3>
+            <p class="org">Instituto da Segurança Social · Lisbon</p>
+            <ul><li>User flows, information architecture, wireframes and prototypes</li><li>Close work with development teams</li><li>Usability tests and concept validation</li></ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="experience resume-block wrap" aria-labelledby="r-edu">
+      <h2 id="r-edu" data-a11y="h2" data-a11y-t="heading">Education and credentials</h2>
+      <ul class="edu-list">
+          <li><p class="edu-name">Auditing Design Systems for Accessibility</p><p class="org">LinkedIn Learning · Feb 2023</p></li>
+          <li><p class="edu-name">UXPM (Level 1)</p><p class="org">UXC · Jul 2023</p></li>
+          <li><p class="edu-name">Design degree</p><p class="org">Escola Superior de Artes e Design (ESAD), Caldas da Rainha · 2014</p></li>
+      </ul>
+    </section>
+
+    <section class="experience resume-block wrap" aria-labelledby="r-skills">
+      <h2 id="r-skills" data-a11y="h2" data-a11y-t="heading">Skills</h2>
+      <div class="skills">
+        <section class="skill" aria-labelledby="sk-1">
+          <h3 id="sk-1">Research</h3>
+          <ul><li>Surveys and competitive analysis</li><li>Information architecture</li><li>Quantitative and qualitative research and testing</li></ul>
+        </section>
+        <section class="skill" aria-labelledby="sk-2">
+          <h3 id="sk-2">Design</h3>
+          <ul><li>UI design, wireframing and prototyping</li><li>Accessible components</li></ul>
+        </section>
+        <section class="skill" aria-labelledby="sk-3">
+          <h3 id="sk-3">Tools</h3>
+          <ul><li>Figma, Adobe Creative Cloud, Jira</li><li>Hotjar, Treejack, VS Code</li></ul>
+        </section>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer wrap" data-a11y="&lt;footer&gt;" data-a11y-t="landmark" data-a11y-pos="bleed">
+    <p class="copy">© 2026 Patrícia Magrinho</p>
+    <div class="footer-tools">
+      <fieldset class="theme" data-a11y="Radio group · &lt;fieldset&gt;" data-a11y-t="button" data-a11y-pos="top">
+        <legend>Theme</legend>
+        <div class="theme-options">
+          <label class="theme-opt"><input type="radio" name="theme" value="light"><span class="icon i-check" aria-hidden="true"></span><span class="icon i-sun" aria-hidden="true"></span>Light</label>
+          <label class="theme-opt"><input type="radio" name="theme" value="dark"><span class="icon i-check" aria-hidden="true"></span><span class="icon i-moon" aria-hidden="true"></span>Dark</label>
+        </div>
+      </fieldset>
+      <a class="to-top" href="#top" data-a11y="Link" data-a11y-t="link" data-a11y-pos="top-end" data-a11y-sm="-">Back to top<span class="icon i-up" aria-hidden="true"></span></a>
+    </div>
+  </footer>
 </body>
 </html>
