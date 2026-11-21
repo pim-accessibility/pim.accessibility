@@ -241,7 +241,10 @@ def top(k, kind):
   <link rel="alternate" hreflang="en" href="{SITE}{path}">
   <link rel="alternate" hreflang="pt-PT" href="{SITE}pt/{path}">
   <link rel="alternate" hreflang="x-default" href="{SITE}{path}">
-  <link rel="icon" href="{b}favicon.ico">
+  <link rel="icon" href="{b}favicon.ico" sizes="32x32">
+  <link rel="icon" href="{b}favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{b}apple-touch-icon.png">
+  <link rel="manifest" href="{b}site.webmanifest">
   <link rel="preload" href="{b}assets/fonts/atkinson-hyperlegible-next-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{b}assets/fonts/atkinson-hyperlegible-next-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
   <script>{HEAD_JS}</script>
@@ -443,7 +446,9 @@ def notfound():
   <title>Page not found — Patrícia Magrinho</title>
   <meta name="robots" content="noindex">
   <meta name="color-scheme" content="light dark">
-  <link rel="icon" href="{P}favicon.ico">
+  <link rel="icon" href="{P}favicon.ico" sizes="32x32">
+  <link rel="icon" href="{P}favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{P}apple-touch-icon.png">
   <script>{HEAD_JS.replace("if(a?a==='on':m('(min-width: 80em)').matches)d.classList.add('anno-on');", "")}</script>
   <link rel="stylesheet" href="{P}css/site.css">
 </head>
